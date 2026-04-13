@@ -20,7 +20,8 @@ app.add_middleware(
 )
 
 # Configuration
-SAVE_PATH = os.path.join(os.getcwd(), "downloads")
+user_home = os.path.expanduser("~")
+SAVE_PATH = os.path.join(user_home, "Downloads", "TorrentKu")
 if not os.path.exists(SAVE_PATH):
     os.makedirs(SAVE_PATH)
 
