@@ -1,4 +1,4 @@
-# Super Downloader (React + FastAPI)
+# TorrentKu (React + FastAPI)
 
 Sebuah aplikasi web modern untuk download torrent dengan performa tinggi (hingga 9 Gbps), berbasis React dan FastAPI.
 
