@@ -293,13 +293,19 @@ async def list_directories(req: DirListRequest):
     current_path = req.current_path
 
     try:
-        # If no path, return Windows root drives
+        # If no path, return root drives based on OS
         if not current_path:
             drives = []
-            for letter in string.ascii_uppercase:
-                drive = f"{letter}:\\"
-                if os.path.exists(drive):
-                    drives.append({"name": drive, "path": drive})
+            if os.name == 'nt':
+                for letter in string.ascii_uppercase:
+                    drive = f"{letter}:\\"
+                    if os.path.exists(drive):
+                        drives.append({"name": drive, "path": drive})
+            else:
+                drives.append({"name": "/", "path": "/"})
+                for extra in ["/Volumes", "/media", "/mnt"]:
+                    if os.path.exists(extra):
+                        drives.append({"name": extra, "path": extra})
             return {"current_path": "", "parent": None, "directories": drives}
 
         if not os.path.isdir(current_path):
